@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Планируй учёбу, создавай карточки для запоминания и занимайся по таймеру."
+  >
+  <title>Учись проще — помощник для учёбы</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Учись проще — главная">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span>учись проще</span>
+      </a>
+
+      <span class="topbar-note">Твой спокойный помощник для учёбы</span>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <p class="sidebar-label">МЕНЮ</p>
+
+        <nav class="navigation" aria-label="Основная навигация">
+          <button class="nav-button active" type="button" data-view="home">
+            <span aria-hidden="true">⌂</span>
+            Главная
+          </button>
+
+          <button class="nav-button" type="button" data-view="tasks">
+            <span aria-hidden="true">✓</span>
+            Мои задачи
+          </button>
+
+          <button class="nav-button" type="button" data-view="cards">
+            <span aria-hidden="true">▤</span>
+            Карточки
+          </button>
+
+          <button class="nav-button" type="button" data-view="timer">
+            <span aria-hidden="true">◷</span>
+            Таймер
+          </button>
+        </nav>
+
+        <div class="sidebar-tip">
+          <span class="tip-icon" aria-hidden="true">☀</span>
+          <p>Небольшие шаги каждый день тоже приводят к большому результату.</p>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section class="view active" id="view-home">
+          <div class="welcome-card">
+            <div class="welcome-copy">
+              <p class="eyebrow">ТВОЁ ПРОСТРАНСТВО ДЛЯ УЧЁБЫ</p>
+              <h1>Учись в своём ритме</h1>
+              <p class="welcome-text">
+                Записывай планы, повторяй важное и делай перерывы.
+                Не нужно успеть всё сразу — начни с одного шага.
+              </p>
+              <button class="primary-button" type="button" data-go="tasks">
+                Запланировать учёбу
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div class="welcome-illustration" aria-hidden="true">
+              <div class="sun">☀</div>
+              <div class="book">▰</div>
+              <div class="sparkle sparkle-one">✦</div>
+              <div class="sparkle sparkle-two">✧</div>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">ВСЁ НУЖНОЕ — РЯДОМ</p>
+              <h2>С чего начнём?</h2>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-icon purple" aria-hidden="true">✓</div>
+              <h3>Учебные задачи</h3>
+              <p>Запиши, что нужно сделать, и отмечай выполненное.</p>
+              <button class="text-button" type="button" data-go="tasks">
+                Открыть задачи <span aria-hidden="true">→</span>
+              </button>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon yellow" aria-hidden="true">▤</div>
+              <h3>Карточки</h3>
+              <p>Создавай вопросы и ответы, чтобы повторять материал.</p>
+              <button class="text-button" type="button" data-go="cards">
+                Открыть карточки <span aria-hidden="true">→</span>
+              </button>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-icon green" aria-hidden="true">◷</div>
+              <h3>Таймер</h3>
+              <p>Сосредоточься на одном деле, а потом сделай перерыв.</p><button class="text-button" type="button" data-go="timer">Открыть таймер <span aria-hidden="true">→</span>
+              </button>
+            </article>
+          </div>
+
+          <p class="privacy-note">
+            Твои задачи и карточки сохраняются в этом браузере на твоём устройстве.
+          </p>
+        </section>
+
+        <section class="view" id="view-tasks">
+          <div class="page-heading">
+            <p class="eyebrow">ПЛАНИРУЙ БЕЗ СПЕШКИ</p>
+            <h1>Мои задачи</h1>
+            <p>Добавь дело, которое хочешь выполнить.</p>
+          </div>
+
+          <div class="content-card">
+            <form id="task-form" class="entry-form">
+              <label class="sr-only" for="task-input">Новая задача</label>
+              <input
+                id="task-input"
+                type="text"
+                maxlength="120"
+                placeholder="Например: повторить тему по биологии"
+                autocomplete="off"
+                required
+              >
+
+              <label class="sr-only" for="task-date">Дата выполнения</label>
+              <input
+                id="task-date"
+                class="date-input"
+                type="date"
+                aria-label="Дата выполнения, необязательно"
+              >
+
+              <button class="primary-button" type="submit">Добавить</button>
+            </form>
+
+            <div class="list-heading">
+              <h2>Твой список</h2>
+              <span id="task-count" class="count-badge">0 задач</span>
+            </div>
+
+            <ul id="task-list" class="task-list"></ul>
+            <p id="task-empty" class="empty-state">
+              Пока задач нет. Добавь первую — это хорошее начало!
+            </p>
+          </div>
+        </section>
+
+        <section class="view" id="view-cards">
+          <div class="page-heading">
+            <p class="eyebrow">ПОВТОРЯЙ И ЗАПОМИНАЙ</p>
+            <h1>Карточки</h1>
+            <p>Напиши вопрос и ответ. Нажми на карточку, чтобы увидеть ответ.</p>
+          </div>
+
+          <div class="content-card">
+            <form id="card-form" class="card-form">
+              <div class="form-field">
+                <label for="card-question">Вопрос или термин</label>
+                <textarea
+                  id="card-question"
+                  maxlength="300"
+                  placeholder="Например: Что такое фотосинтез?"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-field">
+                <label for="card-answer">Ответ или объяснение</label>
+                <textarea
+                  id="card-answer"
+                  maxlength="600"
+                  placeholder="Например: процесс, при котором растения используют свет..."
+                  required
+                ></textarea>
+              </div>
+
+              <button class="primary-button" type="submit">Добавить карточку</button>
+            </form>
+
+            <div class="list-heading card-list-heading">
+              <h2>Повторение</h2>
+              <span id="card-count" class="count-badge">0 карточек</span>
+            </div>
+
+            <div id="card-area" class="card-area">
+              <button
+                id="flashcard"
+                class="flashcard"
+                type="button"
+                aria-label="Показать ответ"
+              >
+                <span id="card-side-label" class="card-side-label">ВОПРОС</span>
+                <span id="card-text" class="flashcard-text"></span>
+                <span class="card-hint">Нажми, чтобы перевернуть</span>
+              </button>
+
+              <div class="card-controls">
+                <button id="previous-card" class="secondary-button" type="button">
+                  ← Назад
+                </button>
+                <span id="card-position" class="card-position">0 / 0</span>
+                <button id="next-card" class="secondary-button" type="button">
+                  Далее →
+                </button><button id="delete-card" class="danger-button" type="button">
+                  Удалить
+                </button></div>
+            </div>
+
+            <p id="card-empty" class="empty-state">
+              Карточек пока нет. Создай первую выше.
+            </p>
+          </div>
+        </section>
+
+        <section class="view" id="view-timer">
+          <div class="page-heading">
+            <p class="eyebrow">ОДНО ДЕЛО ЗА РАЗ</p>
+            <h1>Таймер учёбы</h1>
+            <p>Выбери режим, занимайся в своём темпе и не забывай отдыхать.</p>
+          </div>
+
+          <div class="timer-card">
+            <div class="timer-modes" aria-label="Режим таймера">
+              <button class="mode-button active" type="button" data-mode="focus">
+                Учёба · 25 минут
+              </button>
+              <button class="mode-button" type="button" data-mode="break">
+                Перерыв · 5 минут
+              </button>
+            </div>
+
+            <div
+              id="timer-display"
+              class="timer-display"
+              role="timer"
+              aria-live="off"
+            >25:00</div>
+
+            <p id="timer-status" class="timer-status">Время спокойно начать</p>
+
+            <div class="timer-controls">
+              <button id="start-timer" class="primary-button" type="button">
+                Начать
+              </button>
+              <button id="reset-timer" class="secondary-button" type="button">
+                Сбросить
+              </button>
+            </div>
+
+            <p class="timer-note">
+              Совет: во время учёбы отложи телефон и выбери только одну задачу.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
